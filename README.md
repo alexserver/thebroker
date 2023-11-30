@@ -1,16 +1,49 @@
-# Welcome to Remix!
+# Raul Alejandro Gomez Arceo
 
-- [Remix Docs](https://remix.run/docs)
+# The Broker
 
-## Development
+## About
 
-From your terminal:
+This web app is made with the following stack
+
+- [Remix](https://remix.run/docs).
+- [Material UI/Joy](https://mui.com/joy-ui/getting-started/).
+- [Tailwind](https://tailwindcss.com/).
+- [Recharts](https://recharts.org/en-US/).
+
+## How to run
+
+1.- Create a `.env` file with the following content
+
+```
+MARKETSTACK_API_URL="http://api.marketstack.com/v1"
+MARKETSTACK_API_KEY=" your API from marketstack "
+TEST_API=false
+```
+
+If you want to save on API requests and prefer to fetch fake data set `TEST_API=true` in `.env` file
+
+2.- Install dependancies (works with `Node > v18`)
+
+```sh
+npm run install
+```
+
+3.- Run in Development run from your terminal:
 
 ```sh
 npm run dev
 ```
 
 This starts your app in development mode, rebuilding assets on file changes.
+
+## Tests
+
+For runing tests, run from your terminal:
+
+```sh
+npm run test
+```
 
 ## Deployment
 
