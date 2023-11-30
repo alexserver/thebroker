@@ -1,0 +1,23 @@
+.ticker-page {
+  @apply max-w-7xl px-5 py-5 mx-auto;
+}
+
+.ticker-page .ticker-page-head {
+  @apply flex gap-2 justify-between my-5 items-center;
+}
+
+.ticker-page .title {
+  @apply flex gap-2  justify-between;
+}
+
+.ticker-page .title h1 {
+  @apply text-4xl text-blue-900;
+}
+
+.ticker-page .title a.go-back {
+  @apply p-2  text-blue-900;
+}
+
+.ticker-page .ticker-page-body {
+  @apply flex gap-4 flex-col lg:flex-row;
+}

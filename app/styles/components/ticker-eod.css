@@ -1,0 +1,27 @@
+/* .ticker-eod {
+  @apply bg-white max-w-full lg:max-w-xs;
+} */
+
+.ticker-eod h1.title {
+  @apply text-2xl font-bold;
+}
+
+.ticker-eod .ticker-eod-controls {
+  @apply flex gap-2 items-center justify-start lg:justify-between;
+}
+
+.ticker-eod .data {
+  @apply grid grid-cols-2 grid-flow-row mt-4;
+}
+
+.ticker-eod .data dt {
+  @apply text-blue-900 font-bold;
+}
+
+.ticker-eod .data dd {
+  @apply text-right;
+}
+
+.ticker-eod .no-data {
+  @apply text-2xl font-bold text-slate-600 text-center my-5;
+}
