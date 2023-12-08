@@ -44,7 +44,10 @@ export default function Index() {
   };
   return (
     <div className="index-body">
-      <h1 className="title">Stock Market Info</h1>
+      <h1 className="text-blue-900 text-5xl my-10 text-center">The Broker</h1>
+      <h3 className="text-blue-900 text-2xl text-center">
+        How's the market going?
+      </h3>
       <SearchBar />
       <TickersTable data={data} />
       <Pager {...pagerProps} onPageNavigate={gotoPage} />

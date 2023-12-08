@@ -15,6 +15,16 @@ It fetches real data from [marketstack.com](https://marketstack.com/) API and ex
 
 You can use this web app and host in your server with your own marketstack API keys.
 
+## Screens
+
+The stock tickers main list:
+
+![Main list](./public/screen-detail.png)
+
+The stock info detail view:
+
+![Detail View](./public/screen-detail.png)
+
 ## Tech Stack
 
 This web app is made with the following stack

@@ -111,7 +111,7 @@ export default function TickerView() {
             <BackIcon width={24} height={24} />
           </a>
           <h1>
-            Stock Info: {name} ({symbol})
+            Ticker Info: {name} ({symbol})
           </h1>
         </div>
         <TickerAutocomplete />

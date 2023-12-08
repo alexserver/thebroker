@@ -13,8 +13,13 @@ export default function SearchBar() {
           width: '100%',
         }}
       >
-        <FormLabel htmlFor="searchbar">Ticker Symbol or Ticker Name</FormLabel>
-        <Input id="searchbar" name="s" sx={{ flexGrow: 1 }} />
+        <FormLabel htmlFor="searchbar">Filter by:</FormLabel>
+        <Input
+          id="searchbar"
+          name="s"
+          sx={{ flexGrow: 1 }}
+          placeholder="Symbol or Name"
+        />
         <Button type="submit">Search</Button>
       </Box>
     </Form>
