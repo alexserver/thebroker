@@ -1,8 +1,21 @@
-# Raul Alejandro Gomez Arceo
-
 # The Broker
 
+**Show me the money!**
+
+![Show me the money!](./public/shmthm1.gif)
+
+**SHOW MEEEE THE MOOOOOONEEEEEEY**
+
+![SHOW     ME     THE     MOOOOONEEEEEEEEY!](./public/shmthm2.gif)
+
 ## About
+
+This is a marketstack API visor.
+It fetches real data from [marketstack.com](https://marketstack.com/) API and exposes a short list of many stock market tickers.
+
+You can use this web app and host in your server with your own marketstack API keys.
+
+## Tech Stack
 
 This web app is made with the following stack
 
@@ -17,7 +30,7 @@ This web app is made with the following stack
 
 ```
 MARKETSTACK_API_URL="http://api.marketstack.com/v1"
-MARKETSTACK_API_KEY=" your API from marketstack "
+MARKETSTACK_API_KEY="[your API from marketstack]"
 TEST_API=false
 ```
 
@@ -61,11 +74,6 @@ npm start
 
 Now you'll need to pick a host to deploy it to.
 
-### DIY
+### Collaborate
 
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `remix build`
-
-- `build/`
-- `public/build/`
+Any issue you find, make an issue through github, send a PR, or send me a mail to [alejandro@gomezarceo.mx](mailto:alejandro@gomezarceo.mx)
