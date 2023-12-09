@@ -49,7 +49,7 @@ If you want to save on API requests and prefer to fetch fake data set `TEST_API=
 2.- Install dependancies (works with `Node > v18`)
 
 ```sh
-npm run install
+npm install
 ```
 
 3.- Run in Development run from your terminal:
