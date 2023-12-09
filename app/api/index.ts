@@ -27,7 +27,7 @@ export const getTickers = async ({
   const offset: number = limit * (page - 1); // app is using 1-index based pagination, but API doesn't)
   let url: string = `${apiUrl}/tickers?access_key=${apiKey}&limit=${limit}&offset=${offset}`;
   if (typeof query === 'string' && query !== '') {
-    url += `&query=${query}`;
+    url += `&search=${query}`;
   }
   const res = await fetch(url);
   return res.json();
