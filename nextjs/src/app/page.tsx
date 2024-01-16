@@ -1,7 +1,7 @@
 import { Searchbar } from "./_components/Searchbar";
 import { DataTable } from "./_components/DataTable";
 import { getTickers } from "@/api/fake";
-import { tickerColumns } from "./types/ticker-columns";
+import { tickerColumns } from "./_types/ticker-columns";
 
 async function getData({ page = 1, query = "", limit = 20 }) {
   return getTickers({ limit, page, query });
