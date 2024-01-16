@@ -1,4 +1,4 @@
-import type { Ticker } from "../types/ticker";
+import type { Ticker } from "../_types/ticker";
 
 interface TickerSummaryProps {
   ticker: Ticker;
