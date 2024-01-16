@@ -1,5 +1,5 @@
-import { Searchbar } from "./components/Searchbar";
-import { DataTable } from "./components/DataTable";
+import { Searchbar } from "./_components/Searchbar";
+import { DataTable } from "./_components/DataTable";
 import { getTickers } from "@/api/fake";
 import { tickerColumns } from "./types/ticker-columns";
 
