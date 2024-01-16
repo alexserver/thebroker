@@ -1,5 +1,5 @@
 import { TickerSummary } from "@/app/_components/TickerSummary";
-import { TickerEODInfo } from "@/app/_components/TickerEOD";
+import { TickerEOD } from "@/app/_components/TickerEOD";
 import { getTicker, getTickerEod } from "@/api/fake";
 import type { Ticker } from "@/app/_types/ticker";
 import styles from "./styles.module.css";
@@ -34,7 +34,7 @@ export default async function TickerView({
       <div className="w-full flex flex-col md:flex-row gap-4 justify-between">
         <div className={styles.card}>Chart</div>
         <div className={styles.card}>
-          <TickerEODInfo ticker={ticker} eod={eod} />
+          <TickerEOD ticker={ticker} eod={eod} />
         </div>
       </div>
     </div>

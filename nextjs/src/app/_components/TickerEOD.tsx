@@ -1,13 +1,13 @@
 import type { Ticker } from "../_types/ticker";
-import type { TickerEOD } from "../_types/ticker-eod";
+import type { TickerEOD as TickerEODType } from "../_types/ticker-eod";
 import "./ticker-eod.css";
 
 interface TickerEODInfoProps {
   ticker: Ticker;
-  eod: TickerEOD;
+  eod: TickerEODType;
 }
 
-export const TickerEODInfo = ({ ticker, eod }: TickerEODInfoProps) => {
+export const TickerEOD = ({ ticker, eod }: TickerEODInfoProps) => {
   const currencyFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
