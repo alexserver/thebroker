@@ -5,6 +5,7 @@ import type { Ticker } from "@/app/_types/ticker";
 import styles from "./styles.module.css";
 import { cn } from "@/lib/utils";
 import { format, subDays } from "date-fns";
+import TickerChart from "@/app/_components/TickerChart";
 
 async function getTickerData({ symbol }: { symbol: string }): Promise<Ticker> {
   const ticker = (await getTicker({ symbol })) as Ticker;
@@ -32,7 +33,9 @@ export default async function TickerView({
         <TickerSummary ticker={ticker} />
       </div>
       <div className="w-full flex flex-col md:flex-row gap-4 justify-between">
-        <div className={styles.card}>Chart</div>
+        <div className={styles.card}>
+          <TickerChart ticker={ticker} data={[]} />
+        </div>
         <div className={styles.card}>
           <TickerEOD ticker={ticker} eod={eod} />
         </div>
