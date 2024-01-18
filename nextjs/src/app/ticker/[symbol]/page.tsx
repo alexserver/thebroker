@@ -33,7 +33,7 @@ export default async function TickerView({
         <TickerSummary ticker={ticker} />
       </div>
       <div className="w-full flex flex-col md:flex-row gap-4 justify-between">
-        <div className={styles.card}>
+        <div className={cn("w-full grow", styles.card)}>
           <TickerChart ticker={ticker} data={[]} />
         </div>
         <div className={styles.card}>

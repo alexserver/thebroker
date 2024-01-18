@@ -5,6 +5,7 @@ import Chart from "./Chart";
 import { Input } from "@/components/ui/input";
 import type { Ticker } from "../_types/ticker";
 import { format } from "date-fns";
+import "./ticker-chart.css";
 
 interface ChartData {
   date: string;
