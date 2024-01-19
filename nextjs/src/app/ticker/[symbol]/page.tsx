@@ -55,7 +55,7 @@ export default async function Page({ params, searchParams }: PageProps) {
         </h1>
       </div>
       <TickerSummary ticker={ticker} />
-      <div className="w-full flex flex-col md:flex-row gap-4 justify-between">
+      <div className="w-full flex flex-col lg:flex-row gap-4 justify-between">
         <TickerChart ticker={ticker} data={history.data} />
         <TickerEOD ticker={ticker} eod={eod} />
       </div>

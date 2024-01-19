@@ -1,9 +1,13 @@
 .ticker-chart {
-  @apply max-w-full grow;
+  @apply w-full lg:grow lg:w-auto;
 }
 /* .ticker-chart h1.title {
   @apply text-2xl font-bold text-blue-700;
 } */
 .ticker-chart .ticker-chart-controls {
-  @apply flex gap-2 justify-start items-center;
+  @apply flex flex-col sm:flex-row gap-2 sm:justify-start sm:items-center flex-wrap;
+}
+
+.ticker-chart .form-control {
+  @apply flex flex-col gap-2;
 }

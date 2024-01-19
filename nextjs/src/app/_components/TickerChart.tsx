@@ -63,32 +63,34 @@ export default function TickerChart({ ticker, data }: TickerChartProps) {
       <h1 className={globals.subtitle}>{ticker.symbol} Historical Data</h1>
       <div>
         <div className="ticker-chart-controls">
-          <Label htmlFor="date-from">From:</Label>
-          <DatePicker
-            value={parse(date_from, "yyyy-MM-dd", new Date())}
-            onChange={(value) => onParamChange("h_date_from")(value)}
-          />
-
-          <Label htmlFor="date_to">To:</Label>
-          <DatePicker
-            value={parse(date_to, "yyyy-MM-dd", new Date())}
-            onChange={(value) => onParamChange("h_date_to")(value ?? "")}
-          />
-
-          <Label id="select_label" htmlFor="price_type">
-            Type:
-          </Label>
-          <Select
-            value={pivot}
-            options={[
-              { value: "open", label: "Open" },
-              { value: "close", label: "Close" },
-              { value: "high", label: "High" },
-              { value: "low", label: "Low" },
-              { value: "volume", label: "Volume" },
-            ]}
-            onValueChange={(value) => onParamChange("h_pivot")(value)}
-          />
+          <div className="form-control">
+            <Label htmlFor="date-from">From:</Label>
+            <DatePicker
+              value={parse(date_from, "yyyy-MM-dd", new Date())}
+              onChange={(value) => onParamChange("h_date_from")(value)}
+            />
+          </div>
+          <div className="form-control">
+            <Label htmlFor="date_to">To:</Label>
+            <DatePicker
+              value={parse(date_to, "yyyy-MM-dd", new Date())}
+              onChange={(value) => onParamChange("h_date_to")(value ?? "")}
+            />
+          </div>
+          <div className="form-control">
+            <Label htmlFor="price_type">Type:</Label>
+            <Select
+              value={pivot}
+              options={[
+                { value: "open", label: "Open" },
+                { value: "close", label: "Close" },
+                { value: "high", label: "High" },
+                { value: "low", label: "Low" },
+                { value: "volume", label: "Volume" },
+              ]}
+              onValueChange={(value) => onParamChange("h_pivot")(value)}
+            />
+          </div>
         </div>
         <div className="bg-white">
           <Chart data={data} data_key={pivot} />

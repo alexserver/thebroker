@@ -1,13 +1,13 @@
-/* .ticker-eod {
-  @apply bg-white max-w-full lg:max-w-xs;
-} */
+.ticker-eod {
+  @apply w-full lg:w-[340px];
+}
 
 /* .ticker-eod h1.title {
   @apply text-2xl font-bold text-blue-700;
 } */
 
 .ticker-eod .ticker-eod-controls {
-  @apply flex gap-2 items-center justify-start lg:justify-between;
+  @apply flex gap-2 items-center justify-start;
 }
 
 .ticker-eod .data {

@@ -24,7 +24,7 @@ interface SelectProps {
 export function Select({ value, options, onValueChange }: SelectProps) {
   return (
     <SelectControl onValueChange={(val) => onValueChange(val)}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="min-w-[180px]">
         <SelectValue placeholder="Select a value" />
       </SelectTrigger>
       <SelectContent>

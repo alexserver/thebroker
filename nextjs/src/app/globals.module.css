@@ -7,5 +7,5 @@
 }
 
 .subtitle {
-  @apply text-2xl text-blue-700 font-bold;
+  @apply text-2xl text-blue-700 font-bold mt-2 mb-4;
 }
