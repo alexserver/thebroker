@@ -2,12 +2,14 @@ import { TickerSummary } from "@/app/_components/TickerSummary";
 import { TickerEOD } from "@/app/_components/TickerEOD";
 import { getTicker, getTickerEod } from "@/api/fake";
 import type { Ticker } from "@/app/_types/ticker";
+import { ArrowLeft } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { format, subDays } from "date-fns";
 import TickerChart from "@/app/_components/TickerChart";
 import styles from "./styles.module.css";
 import globals from "@/app/globals.module.css";
+import Link from "next/link";
 
 async function getTickerData({ symbol }: { symbol: string }): Promise<Ticker> {
   const ticker = (await getTicker({ symbol })) as Ticker;
@@ -28,21 +30,18 @@ export default async function TickerView({
 
   return (
     <div className={styles.page}>
-      <div className="w-full p-4">
+      <div className={styles.header}>
+        <Link href="/">
+          <ArrowLeft className="w-10 h-10" />
+        </Link>
         <h1 className={globals.title}>
           Stock Info: {ticker.name} ({params?.symbol})
         </h1>
       </div>
-      <div className={cn("w-full", globals.card)}>
-        <TickerSummary ticker={ticker} />
-      </div>
+      <TickerSummary ticker={ticker} />
       <div className="w-full flex flex-col md:flex-row gap-4 justify-between">
-        <div className={cn("w-full grow", globals.card)}>
-          <TickerChart ticker={ticker} data={[]} />
-        </div>
-        <div className={globals.card}>
-          <TickerEOD ticker={ticker} eod={eod} />
-        </div>
+        <TickerChart ticker={ticker} data={[]} />
+        <TickerEOD ticker={ticker} eod={eod} />
       </div>
     </div>
   );
