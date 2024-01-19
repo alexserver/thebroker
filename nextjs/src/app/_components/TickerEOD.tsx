@@ -7,6 +7,7 @@ import type { TickerEOD as TickerEODType } from "../_types/ticker-eod";
 import { useEffect, useState } from "react";
 import { format, parse } from "date-fns";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import globals from "@/app/globals.module.css";
 import "./ticker-eod.css";
 
 interface TickerEODInfoProps {
@@ -47,8 +48,7 @@ export const TickerEOD = ({ ticker, eod }: TickerEODInfoProps) => {
 
   return (
     <div className="ticker-eod">
-      <h1 className="title">End of the Day details</h1>
-
+      <h1 className={globals.subtitle}>End of the Day details</h1>
       <div className="ticker-eod-controls">
         <Label>Date: </Label>
         <DatePicker value={date} onChange={onDateChange} />

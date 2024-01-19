@@ -5,6 +5,7 @@ import Chart from "./Chart";
 import { Input } from "@/components/ui/input";
 import type { Ticker } from "../_types/ticker";
 import { format } from "date-fns";
+import globals from "@/app/globals.module.css";
 import "./ticker-chart.css";
 
 interface ChartData {
@@ -27,7 +28,7 @@ export default function TickerChart({ ticker, data }: TickerChartProps) {
   const data_key = "close";
   return (
     <div className="ticker-chart">
-      <h1 className="title">{ticker.symbol} Historical Data</h1>
+      <h1 className={globals.subtitle}>{ticker.symbol} Historical Data</h1>
       <div>
         <div className="ticker-chart-controls">
           <Label htmlFor="date-from">From:</Label>

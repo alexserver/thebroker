@@ -2,9 +2,9 @@
   @apply bg-white max-w-full lg:max-w-xs;
 } */
 
-.ticker-eod h1.title {
-  @apply text-2xl font-bold;
-}
+/* .ticker-eod h1.title {
+  @apply text-2xl font-bold text-blue-700;
+} */
 
 .ticker-eod .ticker-eod-controls {
   @apply flex gap-2 items-center justify-start lg:justify-between;
@@ -15,7 +15,7 @@
 }
 
 .ticker-eod .data dt {
-  @apply text-blue-900 font-bold;
+  @apply text-blue-700 font-bold;
 }
 
 .ticker-eod .data dd {

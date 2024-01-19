@@ -1,0 +1,11 @@
+.card {
+  @apply p-4 rounded-md border border-sky-700;
+}
+
+.title {
+  @apply text-4xl text-blue-700 font-bold;
+}
+
+.subtitle {
+  @apply text-2xl text-blue-700 font-bold;
+}
