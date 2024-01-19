@@ -6,5 +6,5 @@
 }
 
 .ticker-summary p .label {
-  @apply font-bold text-blue-700;
+  @apply font-bold text-slate-900;
 }

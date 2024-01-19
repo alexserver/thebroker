@@ -53,7 +53,7 @@ export default function Chart({ data, data_key }: ChartOptions) {
         <YAxis domain={["dataMin", "dataMax"]} />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey={data_key} stroke="#1E3A8A" />
+        <Line type="monotone" dataKey={data_key} stroke="#020617" />
       </LineChart>
     </ResponsiveContainer>
   );
