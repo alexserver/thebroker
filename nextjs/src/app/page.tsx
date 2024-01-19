@@ -20,11 +20,11 @@ export default async function Home({
   const page = Number(searchParams?.page) || 1;
   const { data } = await getData({ page, query });
   return (
-    <main className="flex flex-col items-center justify-start p-10 w-full gap-4">
-      <div className="w-full text-center">
+    <main className="flex flex-col items-center justify-start p-10 pt-20 w-full gap-4">
+      {/* <div className="w-full text-center">
         <h1 className={globals.title}>The Broker</h1>
         <h2 className={globals.subtitle}>Stock Market Info</h2>
-      </div>
+      </div> */}
       <Searchbar />
       <DataTable columns={tickerColumns} data={data} />
     </main>

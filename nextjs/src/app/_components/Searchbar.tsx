@@ -22,20 +22,19 @@ export const Searchbar = () => {
     replace(`${pathname}?${params.toString()}`);
   };
   return (
-    <div className="w-full flex gap-2">
-      <Label className="text-base" htmlFor="query">
-        Stock symbol or name
-      </Label>
-      {/* We need to wrap Input into a div with flex-grow to avoid taking full space and crush the label */}
-      <div className="flex-grow">
-        <Input
-          id="query"
-          name="query"
-          onChange={(e) => setQuery(e.target.value)}
-          defaultValue={searchParams.get("query")?.toString()}
-        />
-      </div>
-      <Button onClick={handleSearch}>Search</Button>
+    <div className="w-full flex gap-2 items-center">
+      <Input
+        id="query"
+        name="query"
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Filter by symbol or name"
+        className="w-auto grow"
+        defaultValue={searchParams.get("query")?.toString()}
+      />
+
+      <Button className="w-[150px]" onClick={handleSearch}>
+        Search
+      </Button>
     </div>
   );
 };
