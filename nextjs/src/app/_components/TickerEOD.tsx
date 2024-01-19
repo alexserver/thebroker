@@ -9,6 +9,7 @@ import { format, parse } from "date-fns";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import globals from "@/app/globals.module.css";
 import "./ticker-eod.css";
+import { cn } from "@/lib/utils";
 
 interface TickerEODInfoProps {
   ticker: Ticker;
@@ -47,7 +48,7 @@ export const TickerEOD = ({ ticker, eod }: TickerEODInfoProps) => {
   }, [searchParams]);
 
   return (
-    <div className="ticker-eod">
+    <div className={cn("ticker-eod", globals.card)}>
       <h1 className={globals.subtitle}>End of the Day details</h1>
       <div className="ticker-eod-controls">
         <Label>Date: </Label>

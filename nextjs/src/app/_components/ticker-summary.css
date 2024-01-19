@@ -1,5 +1,5 @@
 .ticker-summary {
-  @apply flex gap-2 lg:gap-4 flex-wrap justify-between lg:justify-start text-base;
+  @apply w-full flex gap-2 lg:gap-4 flex-wrap justify-between lg:justify-start text-base;
 }
 .ticker-summary p {
   @apply text-base flex flex-col lg:flex-row gap-2;

@@ -1,5 +1,7 @@
 import type { Ticker } from "../_types/ticker";
+import globals from "@/app/globals.module.css";
 import "./ticker-summary.css";
+import { cn } from "@/lib/utils";
 
 interface TickerSummaryProps {
   ticker: Ticker;
@@ -7,7 +9,7 @@ interface TickerSummaryProps {
 
 export const TickerSummary = ({ ticker }: TickerSummaryProps) => {
   return (
-    <div className="ticker-summary">
+    <div className={cn("ticker-summary", globals.card)}>
       <p>
         <span className="label">Symbol: </span>
         {ticker.symbol}
