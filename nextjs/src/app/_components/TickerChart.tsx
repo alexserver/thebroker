@@ -16,6 +16,7 @@ import {
   useSearchParams,
 } from "next/navigation";
 import { DatePicker } from "./DatePicker";
+import { Select } from "./Select";
 
 interface ChartData {
   date: string;
@@ -77,28 +78,17 @@ export default function TickerChart({ ticker, data }: TickerChartProps) {
           <Label id="select_label" htmlFor="price_type">
             Type:
           </Label>
-          {/* <Select
-            id="price_type"
-            name="price_type"
-            value={data_key}
-            onChange={(
-              event: React.SyntheticEvent | null,
-              newValue: string | null
-            ) => onDataTypeChange(newValue ?? '')}
-            slotProps={{
-              button: {
-                id: 'price_type',
-                name: 'price_type',
-                'aria-labelledby': 'select_label',
-              },
-            }}
-          >
-            <Option value="open">Open</Option>
-            <Option value="close">Close</Option>
-            <Option value="high">High</Option>
-            <Option value="low">Low</Option>
-            <Option value="volume">Volume</Option>
-          </Select> */}
+          <Select
+            value={pivot}
+            options={[
+              { value: "open", label: "Open" },
+              { value: "close", label: "Close" },
+              { value: "high", label: "High" },
+              { value: "low", label: "Low" },
+              { value: "volume", label: "Volume" },
+            ]}
+            onValueChange={(value) => onParamChange("h_pivot")(value)}
+          />
         </div>
         <div className="bg-white">
           <Chart data={data} data_key={pivot} />
