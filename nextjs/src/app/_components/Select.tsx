@@ -23,7 +23,10 @@ interface SelectProps {
 
 export function Select({ value, options, onValueChange }: SelectProps) {
   return (
-    <SelectControl onValueChange={(val) => onValueChange(val)}>
+    <SelectControl
+      defaultValue={value}
+      onValueChange={(val) => onValueChange(val)}
+    >
       <SelectTrigger className="min-w-[180px]">
         <SelectValue placeholder="Select a value" />
       </SelectTrigger>
