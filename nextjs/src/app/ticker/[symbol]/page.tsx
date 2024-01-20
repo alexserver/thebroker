@@ -29,9 +29,8 @@ function getDefaultParams({ params, searchParams }: PageProps) {
 async function getData(props: PageProps) {
   const defaultParams = getDefaultParams(props);
   const { symbol } = defaultParams.params;
+  const { h_date_from, h_date_to, eod_date } = defaultParams.searchParams;
   const ticker = (await getTicker({ symbol })) as Ticker;
-  const { h_date_from, h_date_to, h_pivot, eod_date } =
-    defaultParams.searchParams;
   const eod = await getTickerEod({ symbol, date: eod_date });
   const history = await getTickerHistorical({
     symbol,
