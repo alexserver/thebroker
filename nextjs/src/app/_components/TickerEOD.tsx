@@ -31,17 +31,17 @@ export const TickerEOD = ({ ticker, eod }: TickerEODInfoProps) => {
   const onDateChange = (value: Date | undefined) => {
     const params = new URLSearchParams(searchParams);
     if (value) {
-      params.set("eod", format(value, "yyyy-MM-dd"));
+      params.set("eod_date", format(value, "yyyy-MM-dd"));
     } else {
-      params.delete("eod");
+      params.delete("eod_date");
     }
     setDate(value);
     replace(`${pathname}?${params.toString()}`);
   };
 
   useEffect(() => {
-    // if URL contains eod param, we set the date so it's passed down to DatePicker
-    const dt = searchParams.get("eod");
+    // if URL contains eod_date param, we set the date so it's passed down to DatePicker
+    const dt = searchParams.get("eod_date");
     if (dt) {
       setDate(parse(dt, "yyyy-MM-dd", new Date()));
     }
