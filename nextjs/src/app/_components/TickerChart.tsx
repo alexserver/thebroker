@@ -2,13 +2,11 @@
 
 import { Label } from "@/components/ui/label";
 import Chart from "./Chart";
-import { Input } from "@/components/ui/input";
 import type { Ticker } from "../_types/ticker";
 import { format, parse, subDays } from "date-fns";
 import { cn } from "@/lib/utils";
 import globals from "@/app/globals.module.css";
 import "./ticker-chart.css";
-import { SearchParams } from "@/app/_types/page-params";
 import {
   ReadonlyURLSearchParams,
   usePathname,
