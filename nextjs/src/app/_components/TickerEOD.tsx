@@ -44,6 +44,8 @@ export const TickerEOD = ({ ticker, eod }: TickerEODInfoProps) => {
     const dt = searchParams.get("eod_date");
     if (dt) {
       setDate(parse(dt, "yyyy-MM-dd", new Date()));
+    } else {
+      setDate(new Date());
     }
   }, [searchParams]);
 
