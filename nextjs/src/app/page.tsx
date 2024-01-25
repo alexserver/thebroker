@@ -18,10 +18,10 @@ export default async function Home({
 }) {
   const query = searchParams?.query || "";
   const page = Number(searchParams?.page) || 1;
-  const limit = 3;
-  const { data, pagination } = await getData({ page, query, limit });
+  const pageSize = 5;
+  const { data, pagination } = await getData({ page, query, limit: pageSize });
   const pagerProps: PagerProps = {
-    pageSize: limit,
+    pageSize,
     current: page,
     rowsCount: pagination.total,
     paramName: "page",
