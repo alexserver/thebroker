@@ -1,9 +1,0 @@
-.ticker-chart {
-  @apply max-w-full grow px-10 py-5;
-}
-.ticker-chart h1.title {
-  @apply text-2xl font-bold;
-}
-.ticker-chart .ticker-chart-controls {
-  @apply flex gap-2 justify-start items-center;
-}

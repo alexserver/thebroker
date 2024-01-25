@@ -1,0 +1,11 @@
+.ticker-chart {
+  @apply w-full lg:grow lg:w-auto;
+}
+
+.ticker-chart .ticker-chart-controls {
+  @apply flex flex-col sm:flex-row gap-2 sm:justify-start sm:items-center flex-wrap;
+}
+
+.ticker-chart .form-control {
+  @apply flex flex-col gap-2;
+}

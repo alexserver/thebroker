@@ -1,7 +1,0 @@
-.index-body {
-  @apply max-w-5xl p-10 text-base mx-auto;
-}
-
-.index-body h1.title {
-  @apply text-blue-900 text-4xl my-10 text-center;
-}

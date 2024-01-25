@@ -1,0 +1,7 @@
+.page {
+  @apply flex flex-col gap-4 items-center justify-center w-full lg:max-w-6xl mx-auto p-4;
+}
+
+.header {
+  @apply w-full py-4 flex gap-4;
+}

@@ -1,71 +1,51 @@
-# Raul Alejandro Gomez Arceo
-
 # The Broker
 
-## About
+A minimalist UI for the stock market info
 
-This web app is made with the following stack
+## Inspiration
 
-- [Remix](https://remix.run/docs).
-- [Material UI/Joy](https://mui.com/joy-ui/getting-started/).
-- [Tailwind](https://tailwindcss.com/).
-- [Recharts](https://recharts.org/en-US/).
+This app was made out of a code challenge, a home assignment, and I liked enough to make it OSS and use it as a demo for my personal portfolio.
 
-## How to run
+This Web app is made with [NextJs](https://nextjs.org/), and uses the API of (Marketstack)[https://marketstack.com/].
 
-1.- Create a `.env` file with the following content
+## Getting Started
+
+First, create an `.env` file in your project directory, and add the following variables:
 
 ```
+# .env file
+# Marketstack API keys
 MARKETSTACK_API_URL="http://api.marketstack.com/v1"
-MARKETSTACK_API_KEY=" your API from marketstack "
-TEST_API=false
+MARKETSTACK_API_KEY="<your-marketstack-api-keys>"
+TEST_API=true
 ```
 
-If you want to save on API requests and prefer to fetch fake data set `TEST_API=true` in `.env` file
+the `env` variable `TEST_API` determines wether the app will use a fake API (fake data), or the real marketstack API.
 
-2.- Install dependancies (works with `Node > v18`)
+Second, run the development server:
 
-```sh
-npm run install
-```
-
-3.- Run in Development run from your terminal:
-
-```sh
+```bash
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-This starts your app in development mode, rebuilding assets on file changes.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Tests
+## Screens
 
-For runing tests, run from your terminal:
+### Index
 
-```sh
-npm run test
-```
+Here you can view all stock items with some pagination, you can filter also by name or symbol
 
-## Deployment
+![index](./docs/assets/index.png)
 
-First, build your app for production:
+### Symbol detail
 
-```sh
-npm run build
-```
+Here you can view the End of the day data, and some historical data in a chart. You can view data from a date range.
 
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `remix build`
-
-- `build/`
-- `public/build/`
+![index](./docs/assets/detail.png)

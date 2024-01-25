@@ -1,0 +1,11 @@
+.card {
+  @apply p-4 rounded-md border border-slate-800;
+}
+
+.title {
+  @apply text-4xl text-slate-900 font-bold;
+}
+
+.subtitle {
+  @apply text-2xl text-slate-900 font-bold mt-2 mb-4;
+}
