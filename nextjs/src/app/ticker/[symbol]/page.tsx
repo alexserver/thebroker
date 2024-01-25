@@ -1,6 +1,6 @@
 import { TickerSummary } from "@/app/_components/TickerSummary";
 import { TickerEOD } from "@/app/_components/TickerEOD";
-import { getTicker, getTickerEod, getTickerHistorical } from "@/api/fake";
+import { getTicker, getTickerEod, getTickerHistorical } from "@/api";
 import type { Ticker } from "@/app/_types/ticker";
 import { ArrowLeft } from "lucide-react";
 import { format, subDays } from "date-fns";
