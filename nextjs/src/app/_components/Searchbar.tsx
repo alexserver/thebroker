@@ -2,8 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { FormEventHandler, useState } from "react";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 export const Searchbar = () => {
@@ -12,7 +11,7 @@ export const Searchbar = () => {
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const handleSearch = () => {
+  const onSubmit: FormEventHandler<HTMLFormElement> = (evt) => {
     const params = new URLSearchParams(searchParams);
     if (query) {
       params.set("query", query);
@@ -20,21 +19,26 @@ export const Searchbar = () => {
       params.delete("query");
     }
     replace(`${pathname}?${params.toString()}`);
+    evt.preventDefault();
   };
   return (
-    <div className="w-full flex gap-2 items-center">
-      <Input
-        id="query"
-        name="query"
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Filter by symbol or name"
-        className="w-auto grow"
-        defaultValue={searchParams.get("query")?.toString()}
-      />
+    // We enclose the searchbar within a Form to take advantage of the input and submit natural interaction
+    // when user presses enter
+    <form className="w-full" onSubmit={onSubmit}>
+      <div className="w-full flex gap-2 items-center">
+        <Input
+          id="query"
+          name="query"
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Filter by symbol or name"
+          className="w-auto grow"
+          defaultValue={searchParams.get("query")?.toString()}
+        />
 
-      <Button className="w-[150px]" onClick={handleSearch}>
-        Search
-      </Button>
-    </div>
+        <Button type="submit" className="w-[150px]">
+          Search
+        </Button>
+      </div>
+    </form>
   );
 };

@@ -24,7 +24,7 @@ export default function RootLayout({
             <Link href="/">The broker</Link>
           </h1>
           <h2 className=" italic grow">
-            A minimalist UI for your stock market info
+            A minimalist UI for the stock market info
           </h2>
           <Link href="https://github.com/alexserver/thebroker" target="_blank">
             view on github

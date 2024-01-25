@@ -41,7 +41,6 @@ export function Pager({
       : Math.floor(rowsCount / pageSize) + 1;
   // the actual amount of items that will be displayed in the pager, it depends on the requested visible pages, or the max amount of pages the dataset has
   const itemsCount = visiblePages > maxPages ? maxPages : visiblePages;
-  // const items = new Array(pagesCount).fill(0);
   const FIRST_PAGE = 1;
   const LAST_PAGE = maxPages;
 
