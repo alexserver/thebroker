@@ -20,7 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="flex gap-5 px-4 py-2 border-b border-slate-500 w-full justify-between items-baseline">
-          <h1 className="text-2xl font-bold">The broker</h1>
+          <h1 className="text-2xl font-bold">
+            <Link href="/">The broker</Link>
+          </h1>
           <h2 className=" italic grow">
             A minimalist UI for your stock market info
           </h2>
