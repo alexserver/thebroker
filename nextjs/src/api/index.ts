@@ -4,16 +4,16 @@ import {
   getTicker as getTickerFake,
   getTickerEod as getTickerEodFake,
   getTickerHistorical as getTickerHistoricalFake,
-} from './fake';
+} from "./fake";
 
-const apiUrl = process.env.MARKETSTACK_API_URL ?? '';
-const apiKey = process.env.MARKETSTACK_API_KEY ?? '';
-const testAPI = process.env.TEST_API === 'true' ?? false;
+const apiUrl = process.env.MARKETSTACK_API_URL ?? "";
+const apiKey = process.env.MARKETSTACK_API_KEY ?? "";
+const testAPI = process.env.TEST_API === "true" ?? false;
 
 export const getTickers = async ({
   limit = 100,
-  page = 0,
-  query = '',
+  page = 1,
+  query = "",
 }: {
   limit?: number;
   page?: number;
@@ -26,7 +26,7 @@ export const getTickers = async ({
 
   const offset: number = limit * (page - 1); // app is using 1-index based pagination, but API doesn't)
   let url: string = `${apiUrl}/tickers?access_key=${apiKey}&limit=${limit}&offset=${offset}`;
-  if (typeof query === 'string' && query !== '') {
+  if (typeof query === "string" && query !== "") {
     url += `&search=${query}`;
   }
   const res = await fetch(url);
@@ -55,7 +55,7 @@ export const getTickerEod = async ({
   if (testAPI) {
     return getTickerEodFake({ symbol, date });
   }
-  const when = date ?? 'latest';
+  const when = date ?? "latest";
   const url = `${apiUrl}/tickers/${symbol}/eod/${when}?access_key=${apiKey}`;
   const res = await fetch(url);
   const data = await res.json();
