@@ -12,7 +12,7 @@ const testAPI = process.env.TEST_API === 'true' ?? false;
 
 export const getTickers = async ({
   limit = 100,
-  page = 0,
+  page = 1,
   query = '',
 }: {
   limit?: number;
