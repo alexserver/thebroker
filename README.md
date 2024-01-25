@@ -6,7 +6,7 @@ A minimalist UI for the stock market info
 
 This app was made out of a code challenge, a home assignment, and I liked enough to make it OSS and use it as a demo for my personal portfolio.
 
-This Web app is made with [NextJs](https://nextjs.org/), and uses the API of (Marketstack)[https://marketstack.com/].
+This Web app is made with [NextJs](https://nextjs.org/), and uses the API of [Marketstack](https://marketstack.com/).
 
 ## Getting Started
 
