@@ -1,8 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# The Broker
+
+A minimalist UI for the stock market info
+
+## Inspiration
+
+This app was made out of a code challenge, a home assignment, and I liked enough to make it OSS and use it as a demo for my personal portfolio.
+
+This Web app is made with [NextJs](https://nextjs.org/), and uses the API of (Marketstack)[https://marketstack.com/].
 
 ## Getting Started
 
-First, run the development server:
+First, create an `.env` file in your project directory, and add the following variables:
+
+```
+# .env file
+# Marketstack API keys
+MARKETSTACK_API_URL="http://api.marketstack.com/v1"
+MARKETSTACK_API_KEY="<your-marketstack-api-keys>"
+TEST_API=true
+```
+
+the `env` variable `TEST_API` determines wether the app will use a fake API (fake data), or the real marketstack API.
+
+Second, run the development server:
 
 ```bash
 npm run dev
@@ -16,21 +36,16 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Screens
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Index
 
-## Learn More
+Here you can view all stock items with some pagination, you can filter also by name or symbol
 
-To learn more about Next.js, take a look at the following resources:
+![index](./docs/assets/index.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Symbol detail
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Here you can view the End of the day data, and some historical data in a chart. You can view data from a date range.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![index](./docs/assets/detail.png)
