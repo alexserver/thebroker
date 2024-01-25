@@ -43,6 +43,22 @@ async function getData(props: PageProps) {
 export default async function Page({ params, searchParams }: PageProps) {
   const { ticker, eod, history } = await getData({ params, searchParams });
 
+  if (!ticker || !eod || !history) {
+    return (
+      <div className={styles.page}>
+        <div className={styles.header}>
+          <Link href="/">
+            <ArrowLeft className="w-10 h-10" />
+          </Link>
+          <h1 className={globals.title}>
+            Stock Info: There is no available data for this Symbol (
+            {params?.symbol})
+          </h1>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.page}>
       <div className={styles.header}>
