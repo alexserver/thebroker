@@ -4,8 +4,14 @@ import { getTickers } from "@/api";
 import { tickerColumns } from "./_types/ticker-columns";
 import { Pager, type PagerProps } from "./_components/Pager";
 
-async function getData({ page = 1, query = "", limit = 20 }) {
-  return getTickers({ limit, page, query });
+async function getData({
+  page,
+  query = "",
+}: {
+  page?: number;
+  query?: string;
+}) {
+  return getTickers({ page, query });
 }
 
 export default async function Home({
@@ -18,10 +24,9 @@ export default async function Home({
 }) {
   const query = searchParams?.query || "";
   const page = Number(searchParams?.page) || 1;
-  const pageSize = 5;
-  const { data, pagination } = await getData({ page, query, limit: pageSize });
+  const { data, pagination } = await getData({ page, query });
   const pagerProps: PagerProps = {
-    pageSize,
+    pageSize: pagination.limit,
     current: page,
     rowsCount: pagination.total,
     paramName: "page",
