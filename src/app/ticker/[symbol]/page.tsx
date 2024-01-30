@@ -43,7 +43,7 @@ async function getData(props: PageProps) {
 export default async function Page({ params, searchParams }: PageProps) {
   const { ticker, eod, history } = await getData({ params, searchParams });
 
-  if (!ticker || !eod || !history) {
+  if (!ticker) {
     return (
       <div className={styles.page}>
         <div className={styles.header}>
@@ -71,7 +71,7 @@ export default async function Page({ params, searchParams }: PageProps) {
       </div>
       <TickerSummary ticker={ticker} />
       <div className="w-full flex flex-col lg:flex-row gap-4 justify-between">
-        <TickerChart ticker={ticker} data={history.data} />
+        {history && <TickerChart ticker={ticker} data={history.data} />}
         <TickerEOD ticker={ticker} eod={eod} />
       </div>
     </div>
