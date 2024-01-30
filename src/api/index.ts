@@ -21,13 +21,17 @@ export const getTickers = async ({
     url += `&search=${query}`;
   }
   const res = await fetch(url);
-  return res.json();
+  const data = await res.json();
+  console.log({ url, data });
+  return data && "pagination" in data && "data" in data ? data : null;
 };
 
 export const getTicker = async ({ symbol }: { symbol: string | undefined }) => {
   const url = `${API_URL}/tickers/${symbol}?access_key=${API_KEY}`;
   const res = await fetch(url);
-  return res.json();
+  const data = await res.json();
+  console.log({ url, data });
+  return data && "name" in data && "symbol" in data ? data : null;
 };
 
 export const getTickerEod = async ({
@@ -41,10 +45,10 @@ export const getTickerEod = async ({
   const url = `${API_URL}/tickers/${symbol}/eod/${when}?access_key=${API_KEY}`;
   const res = await fetch(url);
   const data = await res.json();
-  // when API returns [], there's no data for that day in Stock Exchange.
-  if (Array.isArray(data) && data.length === 0) return null;
-  // else return data
-  else return data;
+  console.log({ url, data });
+  return data && "open" in data && "low" in data && "close" in data
+    ? data
+    : null;
 };
 
 export const getTickerHistorical = async ({
@@ -58,5 +62,7 @@ export const getTickerHistorical = async ({
 }) => {
   const url = `${API_URL}/eod?access_key=${API_KEY}&symbols=${symbol}&date_from=${date_from}&date_to=${date_to}`;
   const res = await fetch(url);
-  return res.json();
+  const data = await res.json();
+  console.log({ url, data });
+  return data && "pagination" in data && "data" in data ? data : null;
 };
