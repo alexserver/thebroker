@@ -2,7 +2,8 @@
 const TEST_API = process.env.TEST_API === "true" ?? false;
 const API_URL =
   (TEST_API ? process.env.TEST_API_URL : process.env.MARKETSTACK_API_URL) ?? "";
-const API_KEY = TEST_API ? "" : process.env.MARKETSTACK_API_KEY ?? "";
+const API_KEY =
+  (TEST_API ? process.env.TEST_API_KEY : process.env.MARKETSTACK_API_KEY) ?? "";
 const API_DEFAULT_LIMIT = Number(process.env.API_REQUEST_LIMIT) ?? 10;
 const API_DEFAULT_PAGE = 1;
 
