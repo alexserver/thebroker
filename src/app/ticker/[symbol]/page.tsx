@@ -32,18 +32,19 @@ async function getData(props: PageProps) {
   const { h_date_from, h_date_to, eod_date } = defaultParams.searchParams;
   const ticker = (await getTicker({ symbol })) as Ticker;
   const eod = await getTickerEod({ symbol, date: eod_date });
-  const history = await getTickerHistorical({
+  const eod_history = await getTickerHistorical({
     symbol,
     date_from: h_date_from,
     date_to: h_date_to,
   });
+  const { data: history } = eod_history ?? { data: [] };
   return { ticker, eod, history };
 }
 
 export default async function Page({ params, searchParams }: PageProps) {
   const { ticker, eod, history } = await getData({ params, searchParams });
 
-  if (!ticker || !eod || !history) {
+  if (!ticker) {
     return (
       <div className={styles.page}>
         <div className={styles.header}>
@@ -71,7 +72,7 @@ export default async function Page({ params, searchParams }: PageProps) {
       </div>
       <TickerSummary ticker={ticker} />
       <div className="w-full flex flex-col lg:flex-row gap-4 justify-between">
-        <TickerChart ticker={ticker} data={history.data} />
+        <TickerChart ticker={ticker} data={history} />
         <TickerEOD ticker={ticker} eod={eod} />
       </div>
     </div>
