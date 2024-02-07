@@ -24,7 +24,16 @@ export default async function Home({
 }) {
   const query = searchParams?.query || "";
   const page = Number(searchParams?.page) || 1;
-  const { data, pagination } = await getData({ page, query });
+  const result = await getData({ page, query });
+
+  if (!result || "error" in result) {
+    return (
+      <main className="flex flex-col items-center justify-start p-10 mt-10 lg:mt-28 w-full gap-6">
+        There&apos;s a problem fetching data at this moment
+      </main>
+    );
+  }
+  const { pagination, data } = result;
   const pagerProps: PagerProps = {
     pageSize: pagination.limit,
     current: page,
