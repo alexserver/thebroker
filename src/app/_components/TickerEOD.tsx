@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 
 interface TickerEODInfoProps {
   ticker: Ticker;
-  eod: TickerEODType;
+  eod: TickerEODType | null;
 }
 
 const currencyFormatter = new Intl.NumberFormat("en-US", {

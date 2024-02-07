@@ -1,9 +1,6 @@
 /* API calls library */
-const TEST_API = process.env.TEST_API === "true" ?? false;
-const API_URL =
-  (TEST_API ? process.env.TEST_API_URL : process.env.MARKETSTACK_API_URL) ?? "";
-const API_KEY =
-  (TEST_API ? process.env.TEST_API_KEY : process.env.MARKETSTACK_API_KEY) ?? "";
+const API_URL = process.env.API_URL ?? "";
+const API_KEY = process.env.API_KEY ?? "";
 const API_DEFAULT_LIMIT = Number(process.env.API_REQUEST_LIMIT) ?? 10;
 const API_DEFAULT_PAGE = 1;
 
@@ -21,18 +18,26 @@ export const getTickers = async ({
   if (typeof query === "string" && query !== "") {
     url += `&search=${query}`;
   }
-  const res = await fetch(url);
-  const data = await res.json();
-  console.log({ url, data });
-  return data && "pagination" in data && "data" in data ? data : null;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return "pagination" in data && "data" in data ? data : null;
+  } catch (error) {
+    console.error("Error fetching data ", error);
+    return { error };
+  }
 };
 
 export const getTicker = async ({ symbol }: { symbol: string | undefined }) => {
   const url = `${API_URL}/tickers/${symbol}?access_key=${API_KEY}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  console.log({ url, data });
-  return data && "name" in data && "symbol" in data ? data : null;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return data && "name" in data && "symbol" in data ? data : null;
+  } catch (error) {
+    console.error("Error fetching data ", error);
+    return { error };
+  }
 };
 
 export const getTickerEod = async ({
@@ -44,12 +49,16 @@ export const getTickerEod = async ({
 }) => {
   const when = date ?? "latest";
   const url = `${API_URL}/tickers/${symbol}/eod/${when}?access_key=${API_KEY}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  console.log({ url, data });
-  return data && "open" in data && "low" in data && "close" in data
-    ? data
-    : null;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return data && "open" in data && "low" in data && "close" in data
+      ? data
+      : null;
+  } catch (error) {
+    console.error("Error fetching data ", error);
+    return { error };
+  }
 };
 
 export const getTickerHistorical = async ({
@@ -62,8 +71,12 @@ export const getTickerHistorical = async ({
   date_to: string | null;
 }) => {
   const url = `${API_URL}/eod?access_key=${API_KEY}&symbols=${symbol}&date_from=${date_from}&date_to=${date_to}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  console.log({ url, data });
-  return data && "pagination" in data && "data" in data ? data : null;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return "pagination" in data && "data" in data ? data : null;
+  } catch (error) {
+    console.error("Error fetching data ", error);
+    return { error };
+  }
 };

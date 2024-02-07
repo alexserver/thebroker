@@ -37,13 +37,23 @@ async function getData(props: PageProps) {
     date_from: h_date_from,
     date_to: h_date_to,
   });
-  const { data: history } = eod_history ?? { data: [] };
-  return { ticker, eod, history };
+  // it might contain data or null values
+  return { ticker, eod, eod_history };
 }
 
 export default async function Page({ params, searchParams }: PageProps) {
-  const { ticker, eod, history } = await getData({ params, searchParams });
+  const { ticker, eod, eod_history } = await getData({ params, searchParams });
 
+  // Handling API fetch error
+  if (ticker && "error" in ticker) {
+    return (
+      <div className={styles.error}>
+        There&apos;s a problem fetching data at this moment
+      </div>
+    );
+  }
+
+  // handling a not found ticker
   if (!ticker) {
     return (
       <div className={styles.page}>
@@ -60,6 +70,8 @@ export default async function Page({ params, searchParams }: PageProps) {
     );
   }
 
+  const { data: history } = eod_history ? eod_history : { data: [] };
+  // rendering found ticker but with possible null values in EOD or EOD History
   return (
     <div className={styles.page}>
       <div className={styles.header}>
