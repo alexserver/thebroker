@@ -5,7 +5,7 @@ import { DatePicker } from "./DatePicker";
 import type { Ticker } from "../_types/ticker";
 import type { TickerEOD as TickerEODType } from "../_types/ticker-eod";
 import { useEffect, useState } from "react";
-import { format, parse } from "date-fns";
+import { format, parse, subBusinessDays } from "date-fns";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import globals from "@/app/globals.module.css";
 import "./ticker-eod.css";
@@ -45,7 +45,7 @@ export const TickerEOD = ({ ticker, eod }: TickerEODInfoProps) => {
     if (dt) {
       setDate(parse(dt, "yyyy-MM-dd", new Date()));
     } else {
-      setDate(new Date());
+      setDate(subBusinessDays(new Date(), 1));
     }
   }, [searchParams]);
 

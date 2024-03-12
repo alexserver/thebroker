@@ -3,7 +3,7 @@ import { TickerEOD } from "@/app/_components/TickerEOD";
 import { getTicker, getTickerEod, getTickerHistorical } from "@/api";
 import type { Ticker } from "@/app/_types/ticker";
 import { ArrowLeft } from "lucide-react";
-import { format, subDays } from "date-fns";
+import { format, subBusinessDays } from "date-fns";
 import TickerChart from "@/app/_components/TickerChart";
 import styles from "./styles.module.css";
 import globals from "@/app/globals.module.css";
@@ -18,10 +18,12 @@ function getDefaultParams({ params, searchParams }: PageProps) {
     searchParams: {
       h_date_from:
         searchParams?.h_date_from ??
-        format(subDays(new Date(), 30), "yyyy-MM-dd"),
-      h_date_to: searchParams?.h_date_to ?? format(new Date(), "yyyy-MM-dd"),
+        format(subBusinessDays(new Date(), 30), "yyyy-MM-dd"), // 30 days ago
+      h_date_to: searchParams?.h_date_to ?? format(new Date(), "yyyy-MM-dd"), // today
       h_pivot: searchParams?.h_pivot ?? "close",
-      eod_date: searchParams?.eod_date ?? format(new Date(), "yyyy-MM-dd"),
+      eod_date:
+        searchParams?.eod_date ??
+        format(subBusinessDays(new Date(), 1), "yyyy-MM-dd"), // yesterday
     },
   };
 }
