@@ -51,6 +51,7 @@ export const DatePicker = ({ value: date, onChange }: DatePickerProps) => {
           selected={date}
           onSelect={onSelect}
           initialFocus
+          defaultMonth={date}
         />
       </PopoverContent>
     </Popover>
