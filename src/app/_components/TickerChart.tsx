@@ -76,7 +76,7 @@ export default function TickerChart({ ticker, data }: TickerChartProps) {
             />
           </div>
           <div className="form-control">
-            <Label htmlFor="price_type">Type:</Label>
+            <Label htmlFor="price_type">Chart Type:</Label>
             <Select
               value={chart_type}
               options={[
