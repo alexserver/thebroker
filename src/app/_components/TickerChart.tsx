@@ -93,7 +93,7 @@ export default function TickerChart({ ticker, data }: TickerChartProps) {
     { id: "close", label: "Close" },
     { id: "high", label: "High" },
     { id: "low", label: "Low" },
-    { id: "volume", label: "Volume" },
+    // { id: "volume", label: "Volume" }, // do not show volume for now
   ];
   return (
     <div className={cn("ticker-chart", globals.card)}>
