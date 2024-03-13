@@ -15,7 +15,12 @@ import {
 import { compareAsc, format } from "date-fns";
 import { useMemo } from "react";
 
-type data_key = "open" | "close" | "high" | "low" | "volume";
+const data_keys = ["open", "close", "high", "low", "volume"] as const;
+export type DataKey = (typeof data_keys)[number];
+
+export function isDataKey(val: string): val is DataKey {
+  return (data_keys as readonly string[]).indexOf(val) >= 0;
+}
 export interface ChartOptions {
   data: Array<{
     date: string;
@@ -25,7 +30,7 @@ export interface ChartOptions {
     low?: number;
     volume?: number;
   }>;
-  data_keys: Array<data_key>;
+  data_keys: Array<DataKey>;
   chart_type?: "line" | "area";
 }
 
@@ -68,7 +73,14 @@ export default function Chart({
           <CartesianGrid strokeDasharray="1" />
           <XAxis dataKey="date" />
           <YAxis domain={["dataMin", "dataMax"]} />
-          <Tooltip />
+          <Tooltip
+            formatter={(value, name, props) =>
+              new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+              }).format(Number(value))
+            }
+          />
           <Legend />
           {data_keys.map((key) => (
             <Line
@@ -107,7 +119,14 @@ export default function Chart({
           <XAxis dataKey="date" />
           <YAxis domain={["dataMin", "dataMax"]} />
           <CartesianGrid strokeDasharray="1" />
-          <Tooltip />
+          <Tooltip
+            formatter={(value, name, props) =>
+              new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+              }).format(Number(value))
+            }
+          />
           {data_keys.map((key) => (
             <Area
               key={key}

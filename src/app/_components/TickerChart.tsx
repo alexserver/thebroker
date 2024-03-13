@@ -1,7 +1,9 @@
 "use client";
 
 import { Label } from "@/components/ui/label";
-import Chart, { type ChartOptions } from "./Chart";
+import { Checkbox } from "@/components/ui/checkbox";
+
+import Chart, { type ChartOptions, type DataKey, isDataKey } from "./Chart";
 import type { Ticker } from "../_types/ticker";
 import { format, parse, subDays } from "date-fns";
 import { cn } from "@/lib/utils";
@@ -29,13 +31,28 @@ interface TickerChartProps {
   data: Array<ChartData>;
 }
 
-function getDefaultParams(searchParams: ReadonlyURLSearchParams) {
+interface SearchParams {
+  date_from: string;
+  date_to: string;
+  chart_type: "line" | "area";
+  keys: Array<DataKey>;
+}
+
+function getDefaultParams(searchParams: ReadonlyURLSearchParams): SearchParams {
+  const parseKeys = (val: string[]): Array<DataKey> => {
+    const value = val.filter((key) => isDataKey(key)) as Array<DataKey>;
+    // if no params provided through url, show 4 keys as default
+    // if (value.length === 0) return ["open", "close", "high", "low"];
+    // otherwise, return what comes from url params
+    return value;
+  };
   return {
     date_from:
       searchParams.get("h_date_from") ??
       format(subDays(new Date(), 30), "yyyy-MM-dd"),
     date_to: searchParams.get("h_date_to") ?? format(new Date(), "yyyy-MM-dd"),
-    chart_type: searchParams.get("chart_type") ?? "area",
+    chart_type: searchParams.get("chart_type") === "line" ? "line" : "area",
+    keys: parseKeys(searchParams.getAll("keys")),
   };
 }
 
@@ -44,18 +61,40 @@ export default function TickerChart({ ticker, data }: TickerChartProps) {
   const { replace } = useRouter();
   const pathname = usePathname();
   const params = new URLSearchParams(searchParams);
-  const onParamChange =
-    (param: string) => (value: string | Date | undefined) => {
-      // update the url params
-      if (value && (param === "h_date_from" || param === "h_date_to")) {
-        params.set(param, format(value, "yyyy-MM-dd"));
-      } else if (value && param === "chart_type") {
-        params.set(param, value as string);
+  const onParamChange = (param: string) => (value: any) => {
+    // update the url params
+    if (value && (param === "h_date_from" || param === "h_date_to")) {
+      params.set(param, format(value, "yyyy-MM-dd"));
+    } else if (value && param === "chart_type") {
+      params.set(param, value as string);
+    } else if (param.match(/^keys\.[a-z]+/)) {
+      // if param matches 'keys.a-z'
+      const [name, key] = param.split(".");
+      if (value) params.append("keys", key);
+      else {
+        params.delete("keys", key);
+        // if (params.getAll("keys").length === 0) {
+        //   //recreate the array except the deleted key
+        //   const newKeys = keys.filter((k) => k !== key);
+        //   newKeys.forEach((k) => params.append("keys", k));
+        // } else {
+        //   // just delete the key
+        //   params.delete("keys", key);
+        // }
       }
+    }
 
-      replace(`${pathname}?${params.toString()}`);
-    };
-  const { date_from, date_to, chart_type } = getDefaultParams(searchParams);
+    replace(`${pathname}?${params.toString()}`);
+  };
+  const { date_from, date_to, chart_type, keys } =
+    getDefaultParams(searchParams);
+  const items = [
+    { id: "open", label: "Open" },
+    { id: "close", label: "Close" },
+    { id: "high", label: "High" },
+    { id: "low", label: "Low" },
+    { id: "volume", label: "Volume" },
+  ];
   return (
     <div className={cn("ticker-chart", globals.card)}>
       <h1 className={globals.subtitle}>{ticker.symbol} Historical Data</h1>
@@ -87,11 +126,25 @@ export default function TickerChart({ ticker, data }: TickerChartProps) {
             />
           </div>
         </div>
+        <div className="ticker-chart-controls">
+          {items.map((item) => (
+            <div key={item.id} className="form-control">
+              <Label htmlFor="show-open">{item.label}</Label>
+              <Checkbox
+                id="show-open"
+                checked={keys.includes(item.id as DataKey)}
+                onCheckedChange={(checked) =>
+                  onParamChange(`keys.${item.id}`)(checked)
+                }
+              />
+            </div>
+          ))}
+        </div>
         <div className="bg-white">
           <Chart
             data={data}
             chart_type={chart_type as ChartOptions["chart_type"]}
-            data_keys={["open", "close", "high", "low"]}
+            data_keys={keys}
           />
         </div>
       </div>
