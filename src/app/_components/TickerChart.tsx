@@ -42,7 +42,7 @@ function getDefaultParams(searchParams: ReadonlyURLSearchParams): SearchParams {
   const parseKeys = (val: string[]): Array<DataKey> => {
     const value = val.filter((key) => isDataKey(key)) as Array<DataKey>;
     // if no params provided through url, show 4 keys as default
-    // if (value.length === 0) return ["open", "close", "high", "low"];
+    if (value.length === 0) return ["open", "close", "high", "low"];
     // otherwise, return what comes from url params
     return value;
   };
@@ -61,6 +61,14 @@ export default function TickerChart({ ticker, data }: TickerChartProps) {
   const { replace } = useRouter();
   const pathname = usePathname();
   const params = new URLSearchParams(searchParams);
+  const { date_from, date_to, chart_type, keys } =
+    getDefaultParams(searchParams);
+  const items = [
+    { id: "open", label: "Open" },
+    { id: "close", label: "Close" },
+    { id: "high", label: "High" },
+    { id: "low", label: "Low" },
+  ];
   const onParamChange = (param: string) => (value: any) => {
     // update the url params
     if (value && (param === "h_date_from" || param === "h_date_to")) {
@@ -71,30 +79,22 @@ export default function TickerChart({ ticker, data }: TickerChartProps) {
       // if param matches 'keys.a-z'
       const [name, key] = param.split(".");
       if (value) params.append("keys", key);
-      else {
-        params.delete("keys", key);
-        // if (params.getAll("keys").length === 0) {
-        //   //recreate the array except the deleted key
-        //   const newKeys = keys.filter((k) => k !== key);
-        //   newKeys.forEach((k) => params.append("keys", k));
-        // } else {
-        //   // just delete the key
-        //   params.delete("keys", key);
-        // }
+      else if (keys.length > 1) {
+        // if value is unchecked but we have at least 2 checked boxes (we don't want to leave an empty array)
+        const keysCount = params.getAll("keys").length;
+        if (keysCount === 0) {
+          // refresh url param keys[] to all keys except the one that is unchecked
+          keys
+            .filter((k) => k !== key)
+            .forEach((k) => params.append("keys", k));
+        } else if (keysCount > 1) {
+          params.delete("keys", key);
+        }
       }
     }
 
     replace(`${pathname}?${params.toString()}`);
   };
-  const { date_from, date_to, chart_type, keys } =
-    getDefaultParams(searchParams);
-  const items = [
-    { id: "open", label: "Open" },
-    { id: "close", label: "Close" },
-    { id: "high", label: "High" },
-    { id: "low", label: "Low" },
-    // { id: "volume", label: "Volume" }, // do not show volume for now
-  ];
   return (
     <div className={cn("ticker-chart", globals.card)}>
       <h1 className={globals.subtitle}>{ticker.symbol} Historical Data</h1>
