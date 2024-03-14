@@ -51,7 +51,7 @@ export const TickerEOD = ({ ticker, eod }: TickerEODInfoProps) => {
 
   return (
     <div className={cn("ticker-eod", globals.card)}>
-      <h1 className={globals.subtitle}>End of the Day details</h1>
+      <h1 className={globals.subtitle}>End of the Day</h1>
       <div className="ticker-eod-controls">
         <Label>Date: </Label>
         <DatePicker value={date} onChange={onDateChange} />
