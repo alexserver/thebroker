@@ -1,5 +1,5 @@
 .ticker-eod {
-  @apply w-full lg:w-[340px];
+  @apply w-full lg:w-[300px];
 }
 
 /* .ticker-eod h1.title {
