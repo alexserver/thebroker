@@ -13,7 +13,7 @@ import {
   Area,
 } from "recharts";
 import { compareAsc, format } from "date-fns";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 
 const data_keys = ["open", "close", "high", "low", "volume"] as const;
 export type DataKey = (typeof data_keys)[number];
@@ -65,12 +65,23 @@ export default function Chart({
     [data]
   );
 
-  const filteredKeys = useMemo(
+  const filteredKeys: Array<DataKey> = useMemo(
     () =>
       data_type === "prices"
         ? data_keys.filter((key) => key !== "volume")
         : ["volume"], // passing it hardcode since we won't collect this value from urlparams
     [data_type, data_keys]
+  );
+
+  const formatter = useCallback(
+    (value: any) =>
+      data_type === "volume"
+        ? Number(value).toLocaleString("en-US")
+        : new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+          }).format(Number(value)),
+    [data_type]
   );
 
   if (chart_type === "line")
@@ -83,14 +94,7 @@ export default function Chart({
           <CartesianGrid strokeDasharray="1" />
           <XAxis dataKey="date" />
           <YAxis domain={["dataMin", "dataMax"]} />
-          <Tooltip
-            formatter={(value, name, props) =>
-              new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "USD",
-              }).format(Number(value))
-            }
-          />
+          <Tooltip formatter={formatter} />
           <Legend />
           {filteredKeys.map((key) => (
             <Line
@@ -129,14 +133,7 @@ export default function Chart({
           <XAxis dataKey="date" />
           <YAxis domain={["dataMin", "dataMax"]} />
           <CartesianGrid strokeDasharray="1" />
-          <Tooltip
-            formatter={(value, name, props) =>
-              new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "USD",
-              }).format(Number(value))
-            }
-          />
+          <Tooltip formatter={formatter} />
           {filteredKeys.map((key) => (
             <Area
               key={key}
