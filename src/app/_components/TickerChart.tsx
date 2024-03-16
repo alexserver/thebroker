@@ -127,9 +127,11 @@ export default function TickerChart({ ticker, data }: TickerChartProps) {
           </div>
         </div>
         <div className="ticker-chart-controls">
+          <div className="form-control-horizontal">
+            <Label className="leading-none">Prices: </Label>
+          </div>
           {items.map((item) => (
-            <div key={item.id} className="form-control">
-              <Label htmlFor="show-open">{item.label}</Label>
+            <div key={item.id} className="form-control-horizontal">
               <Checkbox
                 id="show-open"
                 checked={keys.includes(item.id as DataKey)}
@@ -137,6 +139,9 @@ export default function TickerChart({ ticker, data }: TickerChartProps) {
                   onParamChange(`keys.${item.id}`)(checked)
                 }
               />
+              <Label htmlFor="show-open" className="leading-none">
+                {item.label}
+              </Label>
             </div>
           ))}
         </div>
