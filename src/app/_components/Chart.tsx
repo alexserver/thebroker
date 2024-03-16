@@ -30,8 +30,9 @@ export interface ChartOptions {
     low?: number;
     volume?: number;
   }>;
-  data_keys: Array<DataKey>;
   chart_type?: "line" | "area";
+  data_type?: "prices" | "volume";
+  data_keys: Array<DataKey>;
 }
 
 const colors = {
@@ -39,13 +40,14 @@ const colors = {
   close: "#2D9596",
   high: "#FF407D",
   low: "#40679E",
-  volume: "#5F5D9C",
+  volume: "#FBA834",
 };
 
 export default function Chart({
   data,
   data_keys,
   chart_type = "line",
+  data_type = "prices",
 }: ChartOptions) {
   // memoize a transformation of data array
   // 1) sort asc by date
@@ -61,6 +63,14 @@ export default function Chart({
           };
         }),
     [data]
+  );
+
+  const filteredKeys = useMemo(
+    () =>
+      data_type === "prices"
+        ? data_keys.filter((key) => key !== "volume")
+        : ["volume"], // passing it hardcode since we won't collect this value from urlparams
+    [data_type, data_keys]
   );
 
   if (chart_type === "line")
@@ -82,7 +92,7 @@ export default function Chart({
             }
           />
           <Legend />
-          {data_keys.map((key) => (
+          {filteredKeys.map((key) => (
             <Line
               key={key}
               type="monotone"
@@ -102,7 +112,7 @@ export default function Chart({
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >
           <defs>
-            {data_keys.map((key) => (
+            {filteredKeys.map((key) => (
               <linearGradient
                 key={key}
                 id={`color${key}`}
@@ -127,7 +137,7 @@ export default function Chart({
               }).format(Number(value))
             }
           />
-          {data_keys.map((key) => (
+          {filteredKeys.map((key) => (
             <Area
               key={key}
               type="monotone"

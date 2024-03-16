@@ -3,7 +3,7 @@
 }
 
 .ticker-chart .ticker-chart-controls {
-  @apply flex flex-col sm:flex-row gap-4 sm:justify-start sm:items-center flex-wrap my-4;
+  @apply flex flex-col sm:flex-row gap-4 sm:justify-start sm:items-center flex-wrap sm:flex-nowrap sm:gap-2 my-4;
 }
 
 .ticker-chart .form-control {

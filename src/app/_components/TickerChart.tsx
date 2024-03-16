@@ -35,6 +35,7 @@ interface SearchParams {
   date_from: string;
   date_to: string;
   chart_type: "line" | "area";
+  data_type: "prices" | "volume";
   keys: Array<DataKey>;
 }
 
@@ -52,6 +53,7 @@ function getDefaultParams(searchParams: ReadonlyURLSearchParams): SearchParams {
       format(subDays(new Date(), 30), "yyyy-MM-dd"),
     date_to: searchParams.get("h_date_to") ?? format(new Date(), "yyyy-MM-dd"),
     chart_type: searchParams.get("chart_type") === "line" ? "line" : "area",
+    data_type: searchParams.get("data_type") === "volume" ? "volume" : "prices",
     keys: parseKeys(searchParams.getAll("keys")),
   };
 }
@@ -61,7 +63,7 @@ export default function TickerChart({ ticker, data }: TickerChartProps) {
   const { replace } = useRouter();
   const pathname = usePathname();
   const params = new URLSearchParams(searchParams);
-  const { date_from, date_to, chart_type, keys } =
+  const { date_from, date_to, chart_type, data_type, keys } =
     getDefaultParams(searchParams);
   const items = [
     { id: "open", label: "Open" },
@@ -71,9 +73,10 @@ export default function TickerChart({ ticker, data }: TickerChartProps) {
   ];
   const onParamChange = (param: string) => (value: any) => {
     // update the url params
-    if (value && (param === "h_date_from" || param === "h_date_to")) {
+    if (value && ["h_date_from", "h_date_to"].includes(param)) {
       params.set(param, format(value, "yyyy-MM-dd"));
-    } else if (value && param === "chart_type") {
+    } else if (value && ["chart_type", "data_type"].includes(param)) {
+      // TODO, if param === data_type && value === prices, reset chart_keys to ALL
       params.set(param, value as string);
     } else if (param.match(/^keys\.[a-z]+/)) {
       // if param matches 'keys.a-z'
@@ -125,30 +128,44 @@ export default function TickerChart({ ticker, data }: TickerChartProps) {
               onValueChange={(value) => onParamChange("chart_type")(value)}
             />
           </div>
-        </div>
-        <div className="ticker-chart-controls">
-          <div className="form-control-horizontal">
-            <Label className="leading-none">Prices: </Label>
+          <div className="form-control">
+            <Label htmlFor="price_type">Data Type:</Label>
+            <Select
+              value={data_type}
+              options={[
+                { value: "prices", label: "Prices" },
+                { value: "volume", label: "Volume" },
+              ]}
+              onValueChange={(value) => onParamChange("data_type")(value)}
+            />
           </div>
-          {items.map((item) => (
-            <div key={item.id} className="form-control-horizontal">
-              <Checkbox
-                id="show-open"
-                checked={keys.includes(item.id as DataKey)}
-                onCheckedChange={(checked) =>
-                  onParamChange(`keys.${item.id}`)(checked)
-                }
-              />
-              <Label htmlFor="show-open" className="leading-none">
-                {item.label}
-              </Label>
-            </div>
-          ))}
         </div>
+        {data_type === "prices" && (
+          <div className="ticker-chart-controls">
+            <div className="form-control-horizontal">
+              <Label className="leading-none">Prices: </Label>
+            </div>
+            {items.map((item) => (
+              <div key={item.id} className="form-control-horizontal">
+                <Checkbox
+                  id="show-open"
+                  checked={keys.includes(item.id as DataKey)}
+                  onCheckedChange={(checked) =>
+                    onParamChange(`keys.${item.id}`)(checked)
+                  }
+                />
+                <Label htmlFor="show-open" className="leading-none">
+                  {item.label}
+                </Label>
+              </div>
+            ))}
+          </div>
+        )}
         <div className="bg-white">
           <Chart
             data={data}
             chart_type={chart_type as ChartOptions["chart_type"]}
+            data_type={data_type}
             data_keys={keys}
           />
         </div>
