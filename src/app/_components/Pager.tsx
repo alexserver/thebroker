@@ -9,7 +9,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export interface PagerProps {
   pageSize: number;
@@ -28,6 +28,8 @@ export function Pager({
   paramName = "page",
   _debug = false,
 }: PagerProps) {
+  const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
   let query: {
@@ -89,6 +91,13 @@ export function Pager({
     return array.map((item, idx) => idx + min);
   }
 
+  // Create URL with updated search params
+  const createQueryString = (page: number) => {
+    const params = new URLSearchParams(searchParams);
+    params.set(paramName, page.toString());
+    return params.toString();
+  };
+
   // the current visible window of pages indexes that the pager will show
   const itemsWindow = getPageWindow();
   const items = getPageWindowItems(itemsWindow);
@@ -134,14 +143,7 @@ export function Pager({
         <PaginationItem>
           {current > FIRST_PAGE && (
             <PaginationPrevious
-              href={{
-                pathname: "/",
-                query: {
-                  ...query,
-                  [paramName]: current - 1,
-                },
-              }}
-              scroll={true}
+              href={`${pathname}?${createQueryString(current - 1)}`}
             />
           )}
         </PaginationItem>
@@ -150,14 +152,7 @@ export function Pager({
         {items.map((item) => (
           <PaginationItem key={item}>
             <PaginationLink
-              href={{
-                pathname: "/",
-                query: {
-                  ...query,
-                  [paramName]: item,
-                },
-              }}
-              scroll={true}
+              href={`${pathname}?${createQueryString(item)}`}
               isActive={item === current}
             >
               {item}
@@ -176,14 +171,7 @@ export function Pager({
         <PaginationItem>
           {current < LAST_PAGE && (
             <PaginationNext
-              href={{
-                pathname: "/",
-                query: {
-                  ...query,
-                  [paramName]: current + 1,
-                },
-              }}
-              scroll={true}
+              href={`${pathname}?${createQueryString(current + 1)}`}
             />
           )}
         </PaginationItem>
