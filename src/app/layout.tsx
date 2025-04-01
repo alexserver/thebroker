@@ -1,8 +1,9 @@
+import { Github } from "lucide-react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import Link from "next/link";
-import { Github } from "lucide-react";
+import { LogoutButton } from "./_components/LogoutButton";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,13 +24,19 @@ export default function RootLayout({
           <h1 className="text-2xl font-bold">
             <Link href="/">The broker</Link>
           </h1>
-          <h2 className=" italic grow">
+          <h2 className="italic grow">
             A minimalist UI for the stock market info
           </h2>
-          <Link href="https://github.com/alexserver/thebroker" target="_blank">
-            view on github
-            <Github className="w-5 h-5 inline-block ml-2" />
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link
+              href="https://github.com/alexserver/thebroker"
+              target="_blank"
+            >
+              view on github
+              <Github className="w-5 h-5 inline-block ml-2" />
+            </Link>
+            <LogoutButton />
+          </div>
         </div>
         {children}
       </body>

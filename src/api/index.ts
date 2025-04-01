@@ -20,6 +20,20 @@ export const getTickers = async ({
   }
   try {
     const res = await fetch(url);
+    if (!res.ok) {
+      if (res.status === 401) {
+        return { error: "Unauthorized" };
+      }
+      return { error: `HTTP error! status: ${res.status}` };
+    }
+    // Check content type before parsing JSON
+    const contentType = res.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      return {
+        error: `Invalid content type: ${contentType}. Expected application/json`,
+      };
+    }
+
     const data = await res.json();
     return "pagination" in data && "data" in data ? data : null;
   } catch (error) {
