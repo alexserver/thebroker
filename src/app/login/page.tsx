@@ -9,6 +9,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Info } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -51,8 +58,30 @@ export default function LoginPage() {
       <Card className="w-[350px]">
         <CardHeader>
           <CardTitle>Login</CardTitle>
-          <CardDescription>
+          <CardDescription className="flex items-center gap-2">
             Enter your credentials to access the site
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Info className="h-4 w-4 text-gray-500" />
+                </TooltipTrigger>
+                <TooltipContent className="max-w-[300px] p-4">
+                  <div className="space-y-2">
+                    <p className="text-sm leading-relaxed">
+                      I&apos;m putting this site behind an auth wall to block
+                      bots.
+                    </p>
+                    <p className="text-sm leading-relaxed">
+                      If you&apos;re visiting this site as a recruiter, ask me
+                      for credentials to{" "}
+                      <span className="font-medium text-blue-500">
+                        alejandro@gomezarceo.mx
+                      </span>
+                    </p>
+                  </div>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </CardDescription>
         </CardHeader>
         <CardContent>
